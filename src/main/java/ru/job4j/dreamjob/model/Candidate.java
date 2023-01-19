@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.model;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,13 +11,17 @@ public class Candidate {
 
     private String description;
 
-    private Date dateTime;
+    private Date dateTime = Date.from(Instant.now());
 
     public Candidate(int id, String name, Date dateTime, String description) {
         this.id = id;
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
+    }
+
+    public Candidate() {
+
     }
 
     public int getId() {
