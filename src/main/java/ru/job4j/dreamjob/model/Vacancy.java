@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.model;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,13 +12,16 @@ public class Vacancy {
 
     private String description;
 
-    private Date dateTime;
+    private Date dateTime = Date.from(Instant.now());
 
     public Vacancy(int id, String title, Date dateTime, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dateTime = dateTime;
+    }
+
+    public Vacancy() {
     }
 
     public int getId() {
