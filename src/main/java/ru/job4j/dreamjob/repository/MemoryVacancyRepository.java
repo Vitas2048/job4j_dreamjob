@@ -6,13 +6,16 @@ import ru.job4j.dreamjob.model.Vacancy;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
-public class MemoryVacancyRepository implements VacancyRepository {
+public final class MemoryVacancyRepository implements VacancyRepository {
 
-    private int nextId = 1;
+    private AtomicInteger nextId = new AtomicInteger(1);
 
-    private final Map<Integer, Vacancy> vacancies = new HashMap<>();
+    private final ConcurrentMap<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     public MemoryVacancyRepository() {
         save(new Vacancy(0, "Intern Java Developer", LocalDateTime.now(), "job4j"));
@@ -25,7 +28,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     @Override
     public Vacancy save(Vacancy vacancy) {
-        vacancy.setId(nextId++);
+        vacancy.setId(nextId.incrementAndGet());
         vacancies.put(vacancy.getId(), vacancy);
         return vacancy;
     }
@@ -48,7 +51,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     @Override
     public Collection<Vacancy> findAll() {
-        return vacancies.values();
+        return new ArrayList<>(vacancies.values().stream().toList());
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
-public class SimpleVacancyService implements VacancyService {
+public final class SimpleVacancyService implements VacancyService {
 
     private final VacancyRepository vacancyRepository;
 
