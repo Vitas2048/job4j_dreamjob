@@ -3,6 +3,7 @@ package ru.job4j.dreamjob.repository;
 import ru.job4j.dreamjob.model.Vacancy;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class MemoryVacancyRepository implements VacancyRepository {
@@ -14,12 +15,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", Date.from(Instant.now()), "job4j"));
-        save(new Vacancy(0, "Junior Java Developer", Date.from(Instant.now()), "job4j"));
-        save(new Vacancy(0, "Junior+ Java Developer", Date.from(Instant.now()), "job4j"));
-        save(new Vacancy(0, "Middle Java Developer", Date.from(Instant.now()), "job4j"));
-        save(new Vacancy(0, "Middle+ Java Developer", Date.from(Instant.now()), "job4j"));
-        save(new Vacancy(0, "Senior Java Developer", Date.from(Instant.now()), "job4j"));
+        save(new Vacancy(0, "Intern Java Developer", LocalDateTime.now(), "job4j"));
+        save(new Vacancy(0, "Junior Java Developer", LocalDateTime.now(), "job4j"));
+        save(new Vacancy(0, "Junior+ Java Developer", LocalDateTime.now(), "job4j"));
+        save(new Vacancy(0, "Middle Java Developer", LocalDateTime.now(), "job4j"));
+        save(new Vacancy(0, "Middle+ Java Developer", LocalDateTime.now(), "job4j"));
+        save(new Vacancy(0, "Senior Java Developer", LocalDateTime.now(), "job4j"));
     }
 
     public static MemoryVacancyRepository getInstance() {

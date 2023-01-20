@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,9 +12,9 @@ public class Candidate {
 
     private String description;
 
-    private Date dateTime = Date.from(Instant.now());
+    private LocalDateTime dateTime = LocalDateTime.now();
 
-    public Candidate(int id, String name, Date dateTime, String description) {
+    public Candidate(int id, String name, LocalDateTime dateTime, String description) {
         this.id = id;
         this.name = name;
         this.dateTime = dateTime;
@@ -21,7 +22,6 @@ public class Candidate {
     }
 
     public Candidate() {
-
     }
 
     public int getId() {
@@ -48,11 +48,11 @@ public class Candidate {
         this.description = description;
     }
 
-    public Date getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
