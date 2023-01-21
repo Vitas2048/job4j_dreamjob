@@ -16,6 +16,8 @@ public class Candidate {
 
     private boolean visible;
 
+    private int cityId;
+
     public Candidate(int id, String name, LocalDateTime dateTime, String description) {
         this.id = id;
         this.name = name;
@@ -29,10 +31,25 @@ public class Candidate {
         this.description = description;
         this.visible = visible;
     }
+    public Candidate(int id, String name, LocalDateTime dateTime, String description, boolean visible, int cityId) {
+        this.id = id;
+        this.name = name;
+        this.dateTime = dateTime;
+        this.description = description;
+        this.visible = visible;
+        this.cityId = cityId;
+    }
 
     public Candidate() {
     }
 
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
 
     public boolean getVisible() {
         return visible;

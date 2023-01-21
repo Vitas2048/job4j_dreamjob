@@ -5,14 +5,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
+import ru.job4j.dreamjob.service.CityService;
 
 @Controller
 @RequestMapping("/candidates")
 public final class CandidateController {
     private final CandidateService candidateService;
 
-    public CandidateController(CandidateService candidateService) {
+    private final CityService cityService;
+
+    public CandidateController(CandidateService candidateService, CityService cityService) {
         this.candidateService = candidateService;
+        this.cityService = cityService;
     }
 
     @GetMapping
@@ -22,7 +26,8 @@ public final class CandidateController {
     }
 
     @GetMapping("/create")
-    public String getCreationPage() {
+    public String getCreationPage(Model model) {
+        model.addAttribute("cities", cityService.findAll());
         return "candidates/create";
     }
 
@@ -39,6 +44,7 @@ public final class CandidateController {
             model.addAttribute("message", "Кандидат с таким идентификатором не найден");
             return "errors/404";
         }
+        model.addAttribute("cities", cityService.findAll());
         model.addAttribute("candidate", candidateOptional.get());
         return "candidates/one";
     }
