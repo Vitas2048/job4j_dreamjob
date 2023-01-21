@@ -39,7 +39,7 @@ public final class MemoryCandidateRepository implements CandidateRepository {
     @Override
     public boolean update(Candidate candidate) {
         return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) -> new Candidate(oldCandidate.getId(),
-                candidate.getName(), candidate.getDateTime(), candidate.getDescription())) != null;
+                candidate.getName(), candidate.getDateTime(), candidate.getDescription(), candidate.getVisible())) != null;
     }
 
     @Override

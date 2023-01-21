@@ -14,14 +14,32 @@ public class Candidate {
 
     private LocalDateTime dateTime = LocalDateTime.now();
 
+    private boolean visible;
+
     public Candidate(int id, String name, LocalDateTime dateTime, String description) {
         this.id = id;
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
     }
+    public Candidate(int id, String name, LocalDateTime dateTime, String description, boolean visible) {
+        this.id = id;
+        this.name = name;
+        this.dateTime = dateTime;
+        this.description = description;
+        this.visible = visible;
+    }
 
     public Candidate() {
+    }
+
+
+    public boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public int getId() {
