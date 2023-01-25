@@ -27,14 +27,12 @@ public final class VacancyController {
 
     @GetMapping
     public String getAll(Model model, HttpSession session) {
-        userSession(model, session);
         model.addAttribute("vacancies", vacancyService.findAll());
         return "vacancies/list";
     }
 
     @GetMapping("/create")
     public String getCreationPage(Model model, HttpSession session) {
-        userSession(model, session);
         model.addAttribute("cities", cityService.findAll());
         return "vacancies/create";
     }
@@ -52,7 +50,6 @@ public final class VacancyController {
 
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id, HttpSession session) {
-        userSession(model, session);
         var vacancyOptional = vacancyService.findById(id);
         if (vacancyOptional.isEmpty()) {
             model.addAttribute("message", "Вакансия с данным идентификатором не найдена");
@@ -88,12 +85,4 @@ public final class VacancyController {
         return "redirect:/vacancies";
     }
 
-    private void userSession(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
-    }
 }

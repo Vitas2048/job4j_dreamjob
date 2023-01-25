@@ -26,14 +26,12 @@ public final class CandidateController {
 
     @GetMapping
     public String getAll(Model model, HttpSession session) {
-        userSession(model, session);
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates/list";
     }
 
     @GetMapping("/create")
     public String getCreationPage(Model model, HttpSession session) {
-        userSession(model, session);
         model.addAttribute("cities", cityService.findAll());
         return "candidates/create";
     }
@@ -51,7 +49,6 @@ public final class CandidateController {
 
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id, HttpSession session) {
-        userSession(model, session);
         var candidateOptional = candidateService.findById(id);
         if (candidateOptional.isEmpty()) {
             model.addAttribute("message", "Кандидат с таким идентификатором не найден");
@@ -85,14 +82,5 @@ public final class CandidateController {
             return "errors/404";
         }
         return "redirect:/candidates";
-    }
-
-    private void userSession(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
     }
 }
