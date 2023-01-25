@@ -20,7 +20,7 @@ public class Sql2oUserRepository implements UserRepository {
     @Override
     public Optional<User> save(User user) {
         try (var connection = sql2o.open()) {
-            if (findAll().stream().noneMatch(p -> Objects.equals(p.getEmail(), user.getEmail()))) {
+            if (!findAll().stream().anyMatch(p -> Objects.equals(p.getEmail(), user.getEmail()))) {
                 var sql = """ 
                       INSERT INTO users (email, name, password)
                       VALUES (:email, :name, :password)
