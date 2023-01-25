@@ -7,6 +7,7 @@ import org.sql2o.Query;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.User;
 
+import java.util.Optional;
 import java.util.Properties;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -52,7 +53,7 @@ class Sql2oUserRepositoryTest {
     public void whenDoubleSave() {
         User user = new User(0, "google", "gogle", "1010");
         sql2oUserRepository.save(user);
-        assertThatThrownBy(() -> sql2oUserRepository.save(user));
+        assertThat(sql2oUserRepository.save(user)).isEqualTo(Optional.empty());
     }
 
     @Test
